@@ -1,6 +1,6 @@
 <?php
 
-use leet_code\Exercicio547;
+use leet_code\bfssplqueue;
 
 class DisjointSet547
 {

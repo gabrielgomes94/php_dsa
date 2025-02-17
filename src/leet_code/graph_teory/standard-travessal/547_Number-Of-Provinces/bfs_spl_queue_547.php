@@ -57,4 +57,5 @@ $isConnected = [
     [1,1,0],[1,1,0],[0,0,1]
 ];
 //$isConnected = [[1,0,0],[0,1,0],[0,0,1]];
+
 echo (new Exercicio547())->findCircleNum($isConnected);
