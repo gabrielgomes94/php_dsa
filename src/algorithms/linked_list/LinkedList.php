@@ -59,6 +59,49 @@ class LinkedList
         }
     }
 
+    public function addBefore($value, $searchValue)
+    {
+        $node = new Node($value);
+
+        if ($this->head->value === $searchValue) {
+            $node->next = $this->head;
+            $this->head = $node;
+
+            return;
+        }
+
+        $current = $this->head;
+        $previous = null;
+
+        while ($current) {
+            if ($current->value === $searchValue) {
+                $node->next = $current;
+                $previous->next = $node;
+
+                return;
+            }
+
+            $previous = $current;
+            $current = $current->next;
+        }
+    }
+
+    public function addAfter($value, $searchValue)    {
+        $node = new Node($value);
+        $current = $this->head;
+
+        while ($current) {
+            if ($current->value === $searchValue) {
+                $node->next = $current->next;
+                $current->next = $node;
+
+                return;
+            }
+
+            $current = $current->next;
+        }
+    }
+
     public function addAtTail($value)
     {
         $current = $this->head;
@@ -143,6 +186,33 @@ class LinkedList
         $this->removeAtHead();
     }
 
+    public function rotateRightMany(int $k)
+    {
+        if ($k == 0 || $this->head === null) return $this->head;
+
+        $current = $this->head;
+        $length = 1;
+
+        while ($current && $current->next) {
+            $current = $current->next;
+            $length++;
+        }
+
+        $k %= $length;
+
+        if ($k == 0) return $this->head;
+
+        $current->next = $this->head;
+        $current = $this->head;
+
+        for ($i = 1; $i < $k; $i++) {
+            $current = $current->next;
+        }
+
+        $this->head = $current->next;
+        $current->next = null;
+    }
+
     public function display()
     {
         $current = $this->head;
@@ -178,6 +248,44 @@ class LinkedList
         }
 
         return false;
+    }
+
+    public function hasCycleBrent()
+    {
+        $fast = $slow = $this->head;
+
+        if (!$fast || !$fast->next) return false;
+
+        $length = 1;
+        $power = 1;
+        $fast = $fast->next;
+
+        while($fast && $fast !== $slow) {
+            if ($power === $length) {
+                $power *= 2;
+                $length = 0;
+                $slow = $fast;
+            }
+
+            $fast = $fast->next;
+            $length++;
+        }
+
+        if ($fast === null) return false;
+
+        $slow = $fast = $this->head;
+
+        while ($length > 0) {
+            $fast = $fast->next;
+            $length--;
+        }
+
+        while ($fast !== $slow) {
+            $fast = $fast->next;
+            $slow = $slow->next;
+        }
+
+        return $slow;
     }
 
     public function setCycleAt($index): void
@@ -263,6 +371,10 @@ $l->display();
 //$l->display();
 //$l->rotateRight();
 //$l->display();
+
+$l->rotateRightMany(125);
+$l->display();
+
 //$l->rotateLeft();
 //$l->display();
 //
@@ -273,10 +385,17 @@ $l->display();
 //$l->removeAtIndex(5);
 //$l->display();
 
-$l->reverse();
-$l->display();
-$r = $l->toArray();
-print_r($r);
+//$l->reverse();
+//
+//$l->addBefore(44, 51);
+//$l->addAfter(87, 2);
+
+
+//$l->display();
+
+
+//$r = $l->toArray();
+//print_r($r);
 
 //$r = $l->getAt(30);
 //print_r($r);
@@ -288,5 +407,6 @@ print_r($r);
 //print_r($l);
 //
 //
-//$r = $l->hasCycle();
+//$r = $l->hasCycleBrent();
+//print_r($r);
 //print_r($r ? 'true' : 'false');
