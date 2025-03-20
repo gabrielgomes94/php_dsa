@@ -1,4 +1,4 @@
-# Domine Listas Ligadas Simples em PHP com 10 exercícios do LeetCode
+# GUIA DE ESTUDO: Listas Simplesmente Ligadas em PHP com 10 exercícios do LeetCode
 
 Listas ligadas são uma das estruturas de dados mais básicas e fundamentais da programação.
 Através delas, podemos modelar e resolver uma série de problemas complexos em código. 
@@ -13,9 +13,9 @@ Nesse artigo, mostrarei como você pode estudar esse tópico através de 10 exer
 3. Detecção de ciclos
 4. Rotação de lista
 5. Inversão de lista
-5. Classes SPL
 6. Implementando uma lista com todas essas operações
 7. Utilizando a interface Iterator na lista
+8. Classes SPL
 
 ## 1. Introdução
 
@@ -507,8 +507,127 @@ public function rotateRightMany(int $k)
 
 ## 6. Inversão de listas
 
-Para inverter uma lista, existem diversas abordagem.
-Uma delas é percorrer a lista do começo ao fim e adicionar todos os nós, um de cada vez, na cabeça da lista.
+Para inverter uma lista, nós percorremos ela e reorganizamos os ponteiros `next` para apontar do início até o fim da lista.
+Definiremos uma variável `$prev` que vai ter o papel de armazenar os nós da lista com o `next` invertido. 
+Ela começa com o valor nulo, e a cada iteração na lista, ela armazena o valor do nó atual, mas com o ponteiro  `next` apontando para o nó oposto. 
+
+No código abaixo, é possivel visualizar a lógica da implementação. 
+
+```php
+public function reverse()
+    {
+        $current = $this->head;
+        $prev = null;
+
+        while ($current) {
+            $next = $current->next; // Armazena o valor de `next` do nó atual, pois o ponteiro de $current será alterado em breve
+            $current->next = $prev; // Aponta para o nó oposto
+            $prev = $current; // Atualiza o valor de $prev
+            $current = $next; // Avança na lista
+        }
+
+        $this->head = $prev; // Substitui a cabeça da lista pela cabeça da lista invertida
+    }
+```
+
+**Complexidade temporal: ** O(n)
+- 
+- Percorre a lista uma única vez.
+
 
 Exercícios:
-- Leetcode 206: Reverse Linked List
+- [Leetcode 206: Reverse Linked List](https://leetcode.com/problems/reverse-linked-list/description/)
+
+
+## 6. DESAFIO: Implemente uma lista ligada completa, com todas essas operações
+
+Como desafio, implemente uma lista ligada com todas as operações que foram estudadas nesse artigo. 
+Essa lista sevirá de base para o próximo item do artigo.
+
+```php
+interface ILinkedList
+{
+    public function add($value);
+    public function addAt($value, $index);
+    public function addBefore($value, $searchValue);
+    public function addAfter($value, $searchValue);
+    public function addAtTail($value);
+    public function addAtHead($value);
+    public function removeAtHead();
+    public function removeAtTail();
+    public function removeAtIndex($index);
+    public function rotateRight();
+    public function rotateLeft();
+    public function rotateRightMany(int $k);
+    public function display();
+    public function getMiddleNode();
+    public function hasCycle(): bool
+    public function hasCycleBrent();
+    public function setCycleAt($index): void;
+    public function getAt($index);
+    public function reverse();
+    public function toArray();
+}
+```
+
+- <<Snippet da lista no github>>
+
+
+## Extra: Utilizando a interface Iterator na lista
+
+O PHP possui a interface Iterator que pode ser usada para transformar qualquer objeto num tipo iterável.
+Assim podemos percorrer esse objeto dentro de um loop `foreach`, por exemplo.
+Além disso, podemos controlar a forma como essa iteração ocorre. 
+
+```php
+class LinkedList implements ILinkedList, Iterator
+{
+    private ?Node $current = null;
+    private int $currentPosition = 0;
+
+    public function current(): mixed
+    {
+        return $this->current;
+    }
+
+    public function next(): void
+    {
+        $this->currentPosition++;
+        $this->current = $this->current?->next;
+    }
+
+    public function key(): mixed
+    {
+        return $this->currentPosition;
+    }
+
+    public function valid(): bool
+    {
+        return $this->current !== null;
+    }
+
+    public function rewind(): void
+    {
+        $this->currentPosition = 0;
+        $this->current = $this->head;
+    }
+}
+```
+
+Após implementar os métodos, a lista passa a ser iterável e podemos utilizá-la nos loops `for` e `foreach`.
+
+
+```php
+foreach ($list as $node) {
+    echo "$node->value -> ";
+}
+
+for ($list->rewind(); $list->valid(); $list->next()) {
+    echo $list->current()->value . " -> ";
+}
+```
+
+## Próximos passos:
+
+- Listas duplamente ligadas
+- Exercícios do LeetCode sobre listas ligadas

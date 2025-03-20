@@ -2,7 +2,6 @@
 
 namespace linked_list;
 
-use linked_list\ILinkedList;
 
 class Node
 {
@@ -16,7 +15,7 @@ class Node
     }
 }
 
-class LinkedList
+class LinkedListIterator implements \Iterator
 {
     public ?Node $head  = null;
     public ?Node $tail = null;
@@ -349,9 +348,39 @@ class LinkedList
 
         return $array;
     }
+
+    private ?Node $current = null;
+    private int $currentPosition = 0;
+
+    public function current(): mixed
+    {
+        return $this->current;
+    }
+
+    public function next(): void
+    {
+        $this->currentPosition++;
+        $this->current = $this->current?->next;
+    }
+
+    public function key(): mixed
+    {
+        return $this->currentPosition;
+    }
+
+    public function valid(): bool
+    {
+        return $this->current !== null;
+    }
+
+    public function rewind(): void
+    {
+        $this->currentPosition = 0;
+        $this->current = $this->head;
+    }
 }
 
-$l = new LinkedList();
+$l = new LinkedListIterator();
 $l->addAtHead(2);
 $l->addAtTail(4);
 $l->addAtTail(5);
@@ -387,8 +416,8 @@ $l->display();
 //$l->removeAtIndex(5);
 //$l->display();
 
-$l->reverse();
-$l->display();
+//$l->reverse();
+//$l->display();
 //
 //$l->addBefore(44, 51);
 //$l->addAfter(87, 2);
@@ -413,3 +442,18 @@ $l->display();
 //$r = $l->hasCycleBrent();
 //print_r($r);
 //print_r($r ? 'true' : 'false');
+
+
+//echo 'loo';
+echo PHP_EOL . PHP_EOL . PHP_EOL;
+foreach ($l as $n) {
+    echo "$n->value -> ";
+}
+
+
+echo PHP_EOL . '-----------' . PHP_EOL . PHP_EOL;
+for ($l->rewind(); $l->valid(); $l->next()) {
+    echo $l->current()->value . " -> ";
+}
+
+//print_r($l);
