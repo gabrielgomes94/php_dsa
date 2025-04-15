@@ -32,11 +32,11 @@ Code Coverage Analysis
   <email>derick@xdebug.org</email>
   <active>yes</active>
  </lead>
- <date>2025-01-06</date>
- <time>15:44:50</time>
+ <date>2025-03-09</date>
+ <time>16:12:12</time>
  <version>
-  <release>3.4.1</release>
-  <api>3.4.1</api>
+  <release>3.4.2</release>
+  <api>3.4.2</api>
  </version>
  <stability>
   <release>stable</release>
@@ -44,14 +44,17 @@ Code Coverage Analysis
  </stability>
  <license filesource="LICENSE" uri="https://xdebug.org/license/1.03">Xdebug-1.03</license>
  <notes>
-Mon, Jan 06, 2025 - Xdebug 3.4.1
+Sun, Mar 09, 2025 - Xdebug 3.4.2
 
 = Fixed bugs:
 
-  - Fixed issue #2306: Segmentation fault on each HTTP request when not listening to debugging connections
-  - Fixed issue #2307: Segmentation fault due to a superglobal being a reference while checking for triggers
-  - Fixed issue #2309: Installation on Windows with PHP PIE failing
-  - Fixed issue #2310: xdebug 3.4.0 crashes php8.1-fpm after script execution
+  - Fixed issue #2313: var_dump does not output some Russian characters
+  - Fixed issue #2314: Class properties with hooks are always shown as null
+  - Fixed issue #2315: xdebug_dump_superglobals() leaks memory
+  - Fixed issue #2317: Code coverage leaks memory
+  - Fixed issue #2321: Segfault when null is assigned to a superglobal
+  - Fixed issue #2323: xdebug_notify() does not respect xdebug.var_display_max_* Settings
+  - Fixed issue #2327: Segmentation Fault 139 if exception thrown in callback since PHP 8.4
  </notes>
  <contents>
   <dir name="/">
@@ -81,7 +84,7 @@ Mon, Jan 06, 2025 - Xdebug 3.4.1
    <file md5sum="77bef9854199eb280ecbd97a83737648" name="src/lib/hash.h" role="src" />
    <file md5sum="46e1530b296f71bf2d00e282b32de691" name="src/lib/headers.c" role="src" />
    <file md5sum="b05e34ecc50ab77d02933c583d88551b" name="src/lib/headers.h" role="src" />
-   <file md5sum="53931b889e94fb0b56bf49164c5c3fdd" name="src/lib/lib.c" role="src" />
+   <file md5sum="2bc8b8a1d6f1e5e6c6e68ff0fdcab511" name="src/lib/lib.c" role="src" />
    <file md5sum="b4af46472f26e1f7f86d8ea602d31cf8" name="src/lib/lib.h" role="src" />
    <file md5sum="d1a7ffc5273a68829a86d24ae0091d15" name="src/lib/log.c" role="src" />
    <file md5sum="2ded0176decc29f511215987461419ff" name="src/lib/log.h" role="src" />
@@ -96,7 +99,7 @@ Mon, Jan 06, 2025 - Xdebug 3.4.1
    <file md5sum="34d98f97b0e5a32a459a083bae66edfb" name="src/lib/str.h" role="src" />
    <file md5sum="5b9f132ac452b6a5077bd401a3af0099" name="src/lib/timing.c" role="src" />
    <file md5sum="637e3b5e753e6afc8b014b02cec7b0ec" name="src/lib/timing.h" role="src" />
-   <file md5sum="8d1263211ddcae79d8be9091519f48be" name="src/lib/var.c" role="src" />
+   <file md5sum="271d634593252dac250d4774e383946e" name="src/lib/var.c" role="src" />
    <file md5sum="3c779b9832916c8fc106df56da6f7304" name="src/lib/var.h" role="src" />
    <file md5sum="2f6fadc3c352bdd9b76210aed95db5db" name="src/lib/var_export_html.c" role="src" />
    <file md5sum="ab2c1ac724a54c2b50946c7746ee135c" name="src/lib/var_export_html.h" role="src" />
@@ -104,14 +107,14 @@ Mon, Jan 06, 2025 - Xdebug 3.4.1
    <file md5sum="a865240b02e1f698ce57098f01693399" name="src/lib/var_export_line.h" role="src" />
    <file md5sum="05df82b845c25a343be4c3796d37074e" name="src/lib/var_export_text.c" role="src" />
    <file md5sum="ce4f91762755006f5df6353465e9927b" name="src/lib/var_export_text.h" role="src" />
-   <file md5sum="853d528e44b5ce6feb9b362e8ecfd04d" name="src/lib/var_export_xml.c" role="src" />
+   <file md5sum="ca9f79967431fa2c342ec8f47474a6c5" name="src/lib/var_export_xml.c" role="src" />
    <file md5sum="dc4f5766d9ebe581d6de6319fcc966ab" name="src/lib/var_export_xml.h" role="src" />
    <file md5sum="8d1a4cb863697a98bf063b6a4ab79050" name="src/lib/vector.h" role="src" />
    <file md5sum="a637b4abdfcc5a1a74ea7fcb94ebf0db" name="src/lib/xml.c" role="src" />
    <file md5sum="bf00317cca78941bc659bf15b07fe385" name="src/lib/xml.h" role="src" />
    <file md5sum="3bf888cd6a2d69da7738f278cb108561" name="src/coverage/branch_info.c" role="src" />
    <file md5sum="963e2650561b374f99943254bda93688" name="src/coverage/branch_info.h" role="src" />
-   <file md5sum="755ade95cfac34e57d49c093be413502" name="src/coverage/code_coverage.c" role="src" />
+   <file md5sum="836e22fbb91ac61473a26796610afda8" name="src/coverage/code_coverage.c" role="src" />
    <file md5sum="c7c6c4688b7654d2a481e64a519596a3" name="src/coverage/code_coverage.h" role="src" />
    <file md5sum="b0a609f56e0d13cf7f6c915af1774512" name="src/coverage/code_coverage_private.h" role="src" />
    <file md5sum="89a65d3495bdf205766dd72377f451ab" name="src/develop/develop.c" role="src" />
@@ -122,7 +125,7 @@ Mon, Jan 06, 2025 - Xdebug 3.4.1
    <file md5sum="d9a771fa984ea3bf7697373847141abe" name="src/develop/php_functions.c" role="src" />
    <file md5sum="a9044ac300d13ef719e4d6ffc6e4ed83" name="src/develop/stack.c" role="src" />
    <file md5sum="8befdeb139efc9a471dc9a3277ca771c" name="src/develop/stack.h" role="src" />
-   <file md5sum="a27d21b79bdf5acbe4725c7eeb8b1fb7" name="src/develop/superglobals.c" role="src" />
+   <file md5sum="f8075b29ea1cd537822b1640cc847888" name="src/develop/superglobals.c" role="src" />
    <file md5sum="3a2f095163c396e8945274b6d4595eaf" name="src/develop/superglobals.h" role="src" />
    <file md5sum="aded20852ffec095aef78ef958250155" name="src/debugger/com.c" role="src" />
    <file md5sum="9a69d4bd80f97d8fc0694314bf146cbf" name="src/debugger/com.h" role="src" />
@@ -131,7 +134,7 @@ Mon, Jan 06, 2025 - Xdebug 3.4.1
    <file md5sum="9fcd238d717652b90ac59fd8a518a7a7" name="src/debugger/debugger_private.h" role="src" />
    <file md5sum="ebb7b99fc1253c60f3caf63bdba60e32" name="src/debugger/handlers.c" role="src" />
    <file md5sum="642ae17b70dc9f5aa96d97ff922dafb5" name="src/debugger/handlers.h" role="src" />
-   <file md5sum="4577b2c675c89fe943e5902fe22e8772" name="src/debugger/handler_dbgp.c" role="src" />
+   <file md5sum="88b9cbd3d317ca52a0efb66160611edc" name="src/debugger/handler_dbgp.c" role="src" />
    <file md5sum="3997f84b9f11a4fdc14ffcebdc76f8ea" name="src/debugger/handler_dbgp.h" role="src" />
    <file md5sum="a7dda9a3ce716c3359caa83adb344676" name="src/debugger/ip_info.c" role="src" />
    <file md5sum="e9bb3affd46a34d2ef21a8a251a54599" name="src/debugger/ip_info.h" role="src" />
@@ -156,13 +159,13 @@ Mon, Jan 06, 2025 - Xdebug 3.4.1
    <file md5sum="899406f5ace0030d435509c2fe4afe39" name="config.w32" role="src" />
    <file md5sum="8f9a93feba6ff23c4bc1bc2929babcc4" name="CREDITS" role="doc" />
    <file md5sum="afd6ce4aa04fdc346e5b3c6e634bd75c" name="LICENSE" role="doc" />
-   <file md5sum="42b2f4baec783077426055a15219c373" name="xdebug.ini" role="doc" />
+   <file md5sum="b1a55d3382533a8f2fda760bbccf72f5" name="xdebug.ini" role="doc" />
    <file md5sum="82ad7174e13d1bb8c64835f8cefeb494" name="Makefile.frag" role="src" />
    <file md5sum="28b8704fb7000ab7ac61e7417596a7bb" name="CONTRIBUTING.rst" role="doc" />
    <file md5sum="225ebff41647c56edec110dd491fce14" name="README.rst" role="doc" />
    <file md5sum="99f2fde690d7f4380f54d05166615873" name="run-xdebug-tests.php" role="src" />
    <file md5sum="f0be1174bf28465213fb218420b3a49b" name="xdebug.c" role="src" />
-   <file md5sum="4268f9a3d1290071178e8da1a071d490" name="php_xdebug.h" role="src" />
+   <file md5sum="6fe66c0800075e11ba8d8f600537c5c1" name="php_xdebug.h" role="src" />
    <file md5sum="73bd04f8dea1031f54b2ff3f5688ecab" name="php_xdebug_arginfo.h" role="src" />
   </dir>
  </contents>
@@ -180,6 +183,29 @@ Mon, Jan 06, 2025 - Xdebug 3.4.1
  <providesextension>xdebug</providesextension>
  <zendextsrcrelease />
  <changelog>
+  <release>
+   <date>2025-01-06</date>
+   <time>15:43:11</time>
+   <version>
+    <release>3.4.1</release>
+    <api>3.4.1</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <license filesource="LICENSE" uri="https://xdebug.org/license/1.03">Xdebug-1.03</license>
+   <notes>
+Mon, Jan 06, 2025 - Xdebug 3.4.1
+
+= Fixed bugs:
+
+  - Fixed issue #2306: Segmentation fault on each HTTP request when not listening to debugging connections
+  - Fixed issue #2307: Segmentation fault due to a superglobal being a reference while checking for triggers
+  - Fixed issue #2309: Installation on Windows with PHP PIE failing
+  - Fixed issue #2310: xdebug 3.4.0 crashes php8.1-fpm after script execution
+   </notes>
+  </release>
   <release>
    <date>2024-11-28</date>
    <time>13:45:52</time>
