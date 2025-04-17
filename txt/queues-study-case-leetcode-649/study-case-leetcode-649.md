@@ -6,7 +6,7 @@
 
 Neste artigo eu mostrarei o meu processo de raciocínio utilizado para resolver o exercício 649 do Leetcode: Dota2 Senate em PHP.
 
-<imagem comparando pior solução e melhor solução>
+![](./images/comparativo-antes-depois.png)
 
 ## Introdução do problema
 
@@ -38,8 +38,6 @@ Então podemos ter em mente o conceito de filas circulares para abordar esse pro
 ## Abordagens
 
 ### 1. Usando operador de array append e a função array_shift()
-
-<imagem do resultado>
 
 Antes de nos preocuparmos em implementar uma fila, podemos usar um array e duas funções auxiliares para realizar o comportamento da fila: array_push() e array_shift(). 
 
@@ -148,6 +146,8 @@ function predictPartyVictory($senate) {
 }
 ```
 
+![](./images/solution-1.png)
+
 **Esse algoritmo é muito ruim.**
 
 Temos dois loops aninhados. 
@@ -243,7 +243,7 @@ function predictPartyVictory($senate) {
 }
 ```
 
-<imagem mostrando o tempo de execução dessa abordagem>>
+![](./images/solution-2.png)
 
 Com isso, removemos o loop mais interno e a complexidade que era O(N⁴), se torna O(N³).
 Podemos notar a melhora analisando o tempo de execução que caiu da casa dos 800ms, para 600ms. 
@@ -317,7 +317,7 @@ function predictPartyVictory($senate) {
 }
 ```
 
-<imagem com os resultados>
+![](./images/solution-3.png)
 
 Com esse algoritmo, reduzimos mais um nível de complexidade e os resultados não nos deixam mentir: saímos da casa dos 634ms para executar esse código em 26ms.
 
@@ -402,7 +402,7 @@ function predictPartyVictory($senate) {
 }
 ```
 
-<imagem do resultado>
+![](./images/solution-4.png)
 
 Com um único loop, o algoritmo executa em tempo O(N) e com isso, fica muito mais rápido.
 Nesse caso, executou em quase metade do tempo da solução anterior.
@@ -462,7 +462,7 @@ function predictPartyVictory($senate) {
 
 Além de rodar em tempo O(N), nós não precisamos criar nenhuma estrutura auxiliar.
 
-<imagem>
+![](./images/solution-5.png)
 
 E com isso, o algoritmo que inicialmente rodou em 807ms, agora está rodando em apenas 4ms. 
 Uma incrível redução de 99,5% no tempo de execução
